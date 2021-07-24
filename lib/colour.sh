@@ -11,7 +11,7 @@ colour() {
         code=$((i * 16 + j))
         printf "\u001b[38;5;${code}m%4s" "$code"
     done
-    echo -n "\n"
+    printf "\n"
   done
 
   printf "\u001b[0m"

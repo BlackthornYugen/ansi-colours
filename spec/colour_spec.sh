@@ -11,6 +11,8 @@ Describe 'ansi colours'
     The output should not include '
 
 '
+    The output should match pattern '*15
+??????[38;5;16m*'
   End
 
   Describe 'should reach'
