@@ -30,6 +30,31 @@ Describe 'ansi colours'
     End
   End
 
+  Describe 'when called with'
+    Parameters
+      255 16
+      30  3
+      254 32
+    End
+
+    It "$1 $2, should wrap correctly"
+      When call print_colours $1 $2
+
+      The line 1 of output should start with "\u001b[38;5;0"
+      The line 1 of output should end with "$(( $2 - 1 ))"
+      The line 2 of output should start with "\u001b[38;5;$(( $2 * 2 - $2 ))"
+      The line 2 of output should end with "$(( $2 * 2 - 1 ))"
+    End
+
+    It "$1 $2, the output should end with $1"
+      When call print_colours $1 $2
+
+      The output should include "\u001b[38;5;$1"
+      The output should not include "\u001b[38;5;$(( $1 + 1 ))"
+    End
+
+  End
+
   It 'contain colour data along with numbers'
     When call print_colours
     The output should include '\u001b[38;5;32m  32\u001b[38;5;33m  33\u001b[38;5;34m  34\u001b[38;5;35m  35\u001b[38;5;36m  36\u001b[38;5;37m  37\u001b[38;5;38m  38\u001b[38;5;39m  39\u001b[38;5;40m  40\u001b[38;5;41m  41\u001b[38;5;42m  42\u001b[38;5;43m  43\u001b[38;5;44m  44\u001b[38;5;45m  45\u001b[38;5;46m  46\u001b[38;5;47m  47'
