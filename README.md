@@ -8,7 +8,11 @@ It prints out the ansi colours as described in [Haoyi's blog post](https://www.l
 ```
 
 ## Tests
-Asuming you have shellspec on your path, test by running "shellspec" from the root.
+Asuming you have shellspec on your path, test by running `shellspec` from the root. Check out [shellspec.info](https://shellspec.info/) for installation instructions.
+
+```shell
+shellspec
+```
 
 ```shell
 ANSI Colour tests
