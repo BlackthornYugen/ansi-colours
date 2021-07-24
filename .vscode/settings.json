@@ -1,0 +1,17 @@
+{
+    "shellcheck.ignorePatterns": {
+        "**/*_spec.sh": true,
+        "**/*.zsh": true,
+        "**/*.zshrc": true,
+        "**/zshrc": true,
+        "**/*.zprofile": true,
+        "**/zprofile": true,
+        "**/*.zlogin": true,
+        "**/zlogin": true,
+        "**/*.zlogout": true,
+        "**/zlogout": true,
+        "**/*.zshenv": true,
+        "**/zshenv": true,
+        "**/*.zsh-theme": true
+    }
+}
