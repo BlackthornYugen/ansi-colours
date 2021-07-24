@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 source lib/colour.sh
-colour
+print_colours

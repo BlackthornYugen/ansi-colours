@@ -1,8 +1,6 @@
-hello() {
-  echo "Hello ${1}!"
-}
+#!/usr/bin/env bash
 
-colour() {
+print_colours() {
   #https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
   for i in $(seq 0 15)
   do
