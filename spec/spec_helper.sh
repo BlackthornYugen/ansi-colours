@@ -22,3 +22,11 @@ spec_helper_configure() {
   # Available functions: import, before_each, after_each, before_all, after_all
   : import 'support/custom_matcher'
 }
+
+# used to prevent bash from interperating ansi
+print_colours_escaped() {
+  case "$0" in
+  *bash) print_colours "$1" "$2" | sed "s/\x1b/\\\u001b/g" ;;
+  *)     print_colours "$1" "$2"
+  esac
+}
