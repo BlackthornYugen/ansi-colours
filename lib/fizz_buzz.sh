@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 fizz_buzz() {
-  if echo "$1" | grep -E "(3|5)" > /dev/null ; then
-    if echo "$1" | grep "5" > /dev/null ; then
-      printf "FIZZ"
-    fi
+  message=""
+  case $1 in
+    *5*) message="${message}FIZZ"
+  esac
 
-    if echo "$1" | grep "3" > /dev/null ; then
-      printf "BUZZ"
-    fi
-    printf "!\n"
-  else
+  case "$1" in
+    *3*) message="${message}BUZZ"
+  esac
+
+  if [ -z "$message" ]; then
     printf "%s\n" "$1"
+  else
+    printf "%s!\n" "$message"
   fi
 }
