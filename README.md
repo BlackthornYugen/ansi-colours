@@ -1,11 +1,28 @@
+# Fizz Buzz
+It echos fizz for 3, buzz for 5, or fizzbuzz for both.
+
+## Usage
+Usage: `./run.sh fizz_buzz [number]
+
+```shell
+./run.sh fizz_buzz 3
+BUZZ!
+
+./run.sh fizz_buzz 305
+FIZZBUZZ!
+
+./run.sh fizz_buzz 1
+1
+```
+
 # ANSI Colours
 It prints out the ansi colours as described in [Haoyi's blog post](https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html) for Python but adapted to sh. Just wanted to make something to play with shellspec.
 
-## Run
-Usage: `./run.sh [max_number] [colours_per_line]
+## Usage
+Usage: `./run.sh print_colours [max_number] [colours_per_line]
 
 ```shell
-./run.sh
+./run.sh print_colours
    0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
   16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31
   32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47
@@ -24,14 +41,14 @@ Usage: `./run.sh [max_number] [colours_per_line]
  240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255
 
 
-./run.sh 30 8
+./run.sh print_colours 30 8
    0   1   2   3   4   5   6   7
    8   9  10  11  12  13  14  15
   16  17  18  19  20  21  22  23
   24  25  26  27  28  29  30
 ```
 
-## Tests
+# Tests
 Asuming you have shellspec on your path, test by running `shellspec` from the root. Check out [shellspec.info](https://shellspec.info/) for installation instructions.
 
 ```shell
@@ -41,6 +58,20 @@ shellspec
 ```shell
 ANSI Colour tests
 Running: /bin/sh [sh]
+
+fizzbuzz
+  should say 1 for 1
+  should say 2 for 2
+  should say BUZZ! for 3
+  should say 4 for 4
+  should say FIZZ! for 5
+  should say 6 for 6
+  should say BUZZ! for 13
+  should say FIZZ! for 15
+  should say FIZZBUZZ! for 35
+  should say FIZZBUZZ! for 53
+  should say FIZZBUZZ! for 350
+  should say FIZZBUZZ! for 305
 
 ansi colours
   should end with a colour reset
@@ -60,6 +91,6 @@ ansi colours
     254 32, the output should end with 254
   contain colour data along with numbers
 
-Finished in 0.32 seconds (user 0.27 seconds, sys 0.06 seconds)
-14 examples, 0 failures
+Finished in 0.40 seconds (user 0.34 seconds, sys 0.10 seconds)
+26 examples, 0 failures
 ```
