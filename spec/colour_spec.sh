@@ -12,7 +12,7 @@ Describe 'ansi colours'
 
 '
     The output should match pattern '*15
-??????[38;5;16m*'
+???????38;5;16m*'
   End
 
   Describe 'should reach'
@@ -26,7 +26,7 @@ Describe 'ansi colours'
 
     It "$1"
       When call print_colours_escaped
-      The output should match pattern "*\u001b[38;5;$1*$1*"
+      The output should match pattern "*\u001b?38;5;$1*$1*"
     End
   End
 

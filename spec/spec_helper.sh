@@ -23,10 +23,11 @@ spec_helper_configure() {
   : import 'support/custom_matcher'
 }
 
-# used to prevent bash from interperating ansi
+# used to prevent zsh & bash from interperating ansi
 print_colours_escaped() {
-  case "$0" in
+  case "${ZSH_ARGZERO:-$0}" in
   *bash) print_colours "$1" "$2" | sed "s/\x1b/\\\u001b/g" ;;
-  *)     print_colours "$1" "$2"
+  *zsh)  print_colours "$1" "$2" | sed "s/\x1b/\\\u001b/g" ;;
+  *)     print_colours "$1" "$2" ;;
   esac
 }
