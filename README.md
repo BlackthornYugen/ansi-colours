@@ -1,14 +1,15 @@
 # Fizz Buzz
-It echos fizz for 3, buzz for 5, or fizzbuzz for both.
+It echos fizz for numbers evenly divisible by 3, buzz for numbers divisible by 5, and 
+fizzbuzz for both.
 
 ## Usage
 Usage: `./run.sh fizz_buzz [number]
 
 ```shell
 ./run.sh fizz_buzz 3
-BUZZ!
+FIZZ!
 
-./run.sh fizz_buzz 305
+./run.sh fizz_buzz 15
 FIZZBUZZ!
 
 ./run.sh fizz_buzz 1

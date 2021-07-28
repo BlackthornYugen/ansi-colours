@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 fizz_buzz() {
   message=""
-  case $1 in
-    *5*) message="${message}FIZZ"
-  esac
+  if [ $(( $1 % 3 )) -eq 0 ]; then
+    message="${message}FIZZ"
+  fi
 
-  case "$1" in
-    *3*) message="${message}BUZZ"
-  esac
+  if [ $(( $1 % 5 )) -eq 0 ]; then
+    message="${message}BUZZ"
+  fi
 
   if [ -z "$message" ]; then
     printf "%s\n" "$1"
