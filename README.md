@@ -1,3 +1,39 @@
+# CSV to HTML
+Convert csv data to an html table.
+
+## Usage
+Usage: `./run.sh csv_to_html < some_stuff.csv`
+
+```shell
+./run.sh csv_to_html <<_
+OBJECTID,BIA_NAME,RULEID,SHAPEAREA,SHAPELEN
+1,HESPELER,,77848.1260806406,3267.51589169133
+2,GALT,,243164.599401387,3217.42021359131
+3,PRESTON,,118523.262606792,1864.71142592139
+_
+```
+
+```html
+<style>
+    tr:nth-child(even) {
+        background: gray;
+        color: white;
+    }
+
+    tr {
+        background-color: lightgray;
+    }
+</style>
+<table>
+<tr><th>OBJECTID</th><th>BIA_NAME</th><th>RULEID</th><th>SHAPEAREA</th><th>SHAPELEN</th></tr>
+<tr><td>1</td><td>HESPELER</td><td></td><td>77848.1260806406</td><td>3267.51589169133</td></tr>
+<tr><td>2</td><td>GALT</td><td></td><td>243164.599401387</td><td>3217.42021359131</td></tr>
+<tr><td>3</td><td>PRESTON</td><td></td><td>118523.262606792</td><td>1864.71142592139</td></tr>
+</table>
+```
+
+[Kitchener Open Data](https://open-kitchenergis.opendata.arcgis.com/) - [Business Improvement Areas](https://open-kitchenergis.opendata.arcgis.com/datasets/cityofcambridge::business-improvement-areas/about)
+
 # Fizz Buzz
 It echos fizz for numbers evenly divisible by 3, buzz for numbers divisible by 5, and 
 fizzbuzz for both.
