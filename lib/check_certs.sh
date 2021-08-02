@@ -39,8 +39,6 @@ function email() {
 }
 
 function check_certs() {
-    pushd ~/mail
-
     while read -r CERT_FILE
     do
     SERVER_NAME=$(basename "$CERT_FILE")
@@ -54,6 +52,4 @@ function check_certs() {
             | $SENDMAIL_BIN -t
     sleep 0.3
     done < certs_to_check.txt
-
-    popd
 }
