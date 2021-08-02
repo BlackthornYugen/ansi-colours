@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 #https://gist.github.com/BlackthornYugen/62fa358f79d9e7248e997ccbeaf11472
+set -e
+
+export DAYS_BEFORE_EMAIL=${DAYS_BEFORE_EMAIL:-21}
+export SENDMAIL_BIN="/usr/sbin/sendmail.postfix"
+export TO_ADDR="${MAIL_ADDR}"
 
 # usage $0 {NEW_CERT} {OLD_CERT}
 function email() {
-    CERT_NAME="`basename $1`"
-    CERT_EXPIRE_DATE="`openssl x509 -in $2 -enddate -noout | sed 's/notAfter=//' | date --file=-`"
+    CERT_NAME=$(basename "$1")
+    CERT_EXPIRE_DATE="$(openssl x509 -in "$2" -enddate -noout | sed 's/notAfter=//' | date --file=-)"
     CERT_DAYS_UNTIL_EXPIRE=$(( ($(date --date="${CERT_EXPIRE_DATE}" +%s) - $(date +%s) ) / 60 / 60 / 24 ))
-    CERT_DETAILS="`openssl x509 -text -noout -in $1`"
-    CERT_PEM="`openssl x509 -in $1`"
+    CERT_DETAILS=$(openssl x509 -text -noout -in "$1")
+    CERT_PEM=$(openssl x509 -in "$1")
 
     printf "To: %s \nBcc: %s \nSubject: %s expires in %s days. \nContent-Type: text/html \n" \
         "$TO_ADDR" \
@@ -28,7 +33,27 @@ function email() {
         "$CERT_EXPIRE_DATE" \
         "$CERT_DETAILS"
     printf "<h1>Certificate Status</h1><p>The following is the status of all renewals on %s for %s.</p>\n<pre>%s</pre>" \
-        "`hostname --fqdn`" \
+        "$(hostname --fqdn)" \
         "$USER" \
-        "`~/.acme.sh/acme.sh list`"
+        "$(~/.acme.sh/acme.sh list)"
+}
+
+function check_certs() {
+    pushd ~/mail
+
+    while read -r CERT_FILE
+    do
+    SERVER_NAME=$(basename "$CERT_FILE")
+    SERVER_NAME="${SERVER_NAME:0:-4}"
+    printf "Checking to see if %s will expire in the next %s days... " "${SERVER_NAME}" "$DAYS_BEFORE_EMAIL"
+    openssl s_client -servername "${SERVER_NAME}" -connect "${SERVER_NAME}:443" < /dev/null 2> /dev/null \
+        | tee "${SERVER_NAME}.current.pem" \
+        | openssl x509 -noout -checkend $((60 * 60 * 24 * "${DAYS_BEFORE_EMAIL}")) || \
+            email "$CERT_FILE" "${SERVER_NAME}.current.pem" \
+            | tee "last-mail-${SERVER_NAME}.txt" \
+            | $SENDMAIL_BIN -t
+    sleep 0.3
+    done < certs_to_check.txt
+
+    popd
 }
