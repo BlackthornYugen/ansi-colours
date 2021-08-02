@@ -1,3 +1,16 @@
+# Check certs
+Given a text file with certificate paths, verify that each URL is providing the latest certificate
+and send emails for each certificate within 21 days of expiration.
+
+## Usage
+
+```shell
+./run.sh check_certs <<_ 
+/home/svc_acme/.acme.sh/jskw.ca_ecc/jskw.ca.cer
+/home/svc_acme/.acme.sh/jskw.dev_ecc/jskw.dev.cer
+_
+```
+
 # CSV to HTML
 Convert csv data to an html table.
 
